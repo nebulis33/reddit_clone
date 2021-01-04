@@ -1,6 +1,10 @@
 <h1><%= @sub.title %></h1>
 <h3><%= @sub.description %></h3>
 <h2>Moderator: <%= @sub.moderator_username %></h2>
-<%= link_to 'delete', sub_url(sub), method: "delete" if sub.moderator == current_user %>
+<%= link_to 'delete', sub_url(@sub), method: "delete" if @sub.moderator == current_user %>
 
-POSTS WILL GO HERE
+<ul>
+    <% @sub.posts.each do |post| %>
+        <li><%= link_to post.title, post_url(post) %></li>
+    <% end %>
+</ul>

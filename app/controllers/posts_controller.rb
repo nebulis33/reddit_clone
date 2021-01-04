@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       flash[:success] = "The post has been created!"
       redirect_to post_url(@post)
     else
-      flash.now[:error] = @post.errors.full_messages
+      flash.now[:errors] = @post.errors.full_messages
       render 'new'
     end
   end
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
       flash[:success] = "The post has been updated!"
       redirect_to post_url(@post)
     else
-      flash.now[:error] = @post.errors.full_messages
+      flash.now[:errors] = @post.errors.full_messages
       render 'edit'
     end
   end
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
       flash[:success] = "Successfully deleted the post!"
       redirect_to posts_url
     else
-      flash[:error] = @post.errors.full_messages
+      flash[:errors] = @post.errors.full_messages
       redirect_to post_url(@post)
     end
   end
@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :url, :content, :sub_id)
+      params.require(:post).permit(:title, :url, :content, :author_id, sub_ids: [])
     end
 
     def author_edits_postss!

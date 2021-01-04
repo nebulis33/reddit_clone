@@ -1,4 +1,4 @@
-<%= form_with model: post do |f| %>
+<%= form_with model: post, local: true do |f| %>
     <%= f.label :title, "Title:" %>
     <%= f.text_field :title %>
     <br>
@@ -8,8 +8,12 @@
     <%= f.label :sub_id, "Post Content:" %>
     <%= f.text_area :content %>
     <br>
-    <%= f.label :sub_id, "Sub:" %>
-    <%= f.select :sub_id, Sub.all.ids %>
+    <%= f.label "Subs to post to:" %>
     <br>
+    <% Sub.all.each do |sub| %>
+        <%= f.label sub.title %>
+        <%= check_box_tag "post[sub_ids][]", sub.id, (true if post.sub_ids.include?(sub.id)) %>
+        <br>
+    <% end %>
     <%= f.submit "Submit" %>
 <% end %>

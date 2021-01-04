@@ -16,7 +16,7 @@ class SubsController < ApplicationController
       flash[:success] = "The sub has been created!"
       redirect_to sub_url(@sub)
     else
-      flash.now[:error] = @sub.errors.full_messages
+      flash.now[:errors] = @sub.errors.full_messages
       render 'new'
     end
   end
@@ -35,7 +35,7 @@ class SubsController < ApplicationController
       flash[:success] = "The sub has been updated!"
       redirect_to sub_url(@sub)
     else
-      flash.now[:error] = @sub.errors.full_messages
+      flash.now[:errors] = @sub.errors.full_messages
       render 'edit'
     end
   end
@@ -46,7 +46,7 @@ class SubsController < ApplicationController
       flash[:success] = "Successfully deleted the sub!"
       redirect_to subs_url
     else
-      flash[:error] = @sub.errors.full_messages
+      flash[:errors] = @sub.errors.full_messages
       redirect_to sub_url(@sub)
     end
   end
