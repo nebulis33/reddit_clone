@@ -1,0 +1,15 @@
+<%= form_with model: post do |f| %>
+    <%= f.label :title, "Title:" %>
+    <%= f.text_field :title %>
+    <br>
+    <%= f.label :url, "URL:" %>
+    <%= f.text_field :url %>
+    <br>
+    <%= f.label :sub_id, "Post Content:" %>
+    <%= f.text_area :content %>
+    <br>
+    <%= f.label :sub_id, "Sub:" %>
+    <%= f.select :sub_id, Sub.all.ids %>
+    <br>
+    <%= f.submit "Submit" %>
+<% end %>
