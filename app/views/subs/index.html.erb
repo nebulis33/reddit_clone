@@ -1,6 +1,6 @@
 <h1>Subs</h1>
 <ul>
     <% @subs.each do |sub| %>
-        <li><%= link_to sub.title, sub_url(sub) %></li>
+        <li><%= link_to sub.title, sub_url(sub) %> <%= link_to 'delete', sub_url(sub), method: "delete" if sub.moderator == current_user %></li>
     <% end %>
 </ul>
