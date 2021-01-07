@@ -3,3 +3,13 @@
 <h4>Posted to <%#= link_to @post.subs_title, @post.sub %> by <%= @post.author_username %></h4>
 <p><%= @post.content %></p>
 
+<%= link_to "Comment on this post!", new_post_comment_path(@post.id) %>
+
+<ul>
+    <% comments_by_parent = @post.comments_by_parent %>
+    <% comments_by_parent[nil].each do |top_level_comment| %>
+      <li>
+        <%= render partial: "comments/comment", locals: {comment: top_level_comment, comments_by_parent: comments_by_parent} %>
+      </li>
+    <% end %>
+</ul>

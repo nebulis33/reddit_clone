@@ -1,0 +1,7 @@
+<%= form_with model: comment do |f| %>
+    <%= f.label :content, "Post body:" %>
+    <%= f.text_area :content %>
+    <%= f.hidden_field :post_id, value: comment.post_id %>
+    <%= f.hidden_field :parent_comment_id, value: comment.parent_comment_id %>
+    <%= f.submit "Post comment" %>
+<% end %>
