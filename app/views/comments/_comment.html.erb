@@ -1,6 +1,6 @@
-<p>
-  <%= link_to comment.content, comment_url(comment.id) %>
-</p>
+<%= link_to comment.content, comment_path(comment) %>
+<%= comment.author.username %>
+<%= comment.created_at %>
 
 <ul>
   <% comments_by_parent[comment.id].each do |child_comment| %>

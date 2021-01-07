@@ -1,3 +1,4 @@
 <%= @comment.content %>
-Reply to this comment:
+<br>
+<h3>Reply to this comment:</h3>
 <%= render partial: 'form', locals: {comment: @new_comment} %>
