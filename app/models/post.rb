@@ -5,6 +5,7 @@ class Post < ApplicationRecord
     has_many :post_subs, inverse_of: :post, dependent: :destroy
     has_many :subs, through: :post_subs, source: :sub
     has_many :comments, inverse_of: :post
+    has_many :votes, as: :voteable
     belongs_to :author, class_name: "User", foreign_key: :author_id
 
     delegate :username, to: :author, prefix: true
@@ -16,5 +17,9 @@ class Post < ApplicationRecord
             comments_by_parent[comment.parent_comment_id] << comment
         end
         comments_by_parent
+    end
+
+    def votes_sum
+        self.votes.sum(:value)
     end
 end

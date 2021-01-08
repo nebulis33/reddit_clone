@@ -1,9 +1,14 @@
 <%= link_to comment.content, comment_path(comment) %>
 <%= comment.author.username %>
 <%= comment.created_at %>
+<%= link_to "🔼", upvote_comment_path(comment), method: 'post' %> 
+<%= link_to "🔽", downvote_comment_path(comment), method: 'post' %>
+<%= comment.votes_sum %> <%# too many queries%>
 
 <ul>
   <% comments_by_parent[comment.id].each do |child_comment| %>
-    <li><%= render partial: "comments/comment", locals: {comment: child_comment, comments_by_parent: comments_by_parent} %></li>
+    <li>
+    <%= render partial: "comments/comment", locals: {comment: child_comment, comments_by_parent: comments_by_parent} %>
+    </li>
   <% end %>
 </ul>

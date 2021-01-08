@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :author_edits_postss!, only: [:edit, :update]
+  before_action :author_edits_posts!, only: [:edit, :update]
 
   def new
     @post = Post.new
@@ -48,14 +48,31 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+    vote(1)
+  end
+
+  def downvote
+    vote(-1)
+  end
+
   private
 
     def post_params
       params.require(:post).permit(:title, :url, :content, :author_id, sub_ids: [])
     end
 
-    def author_edits_postss!
+    def author_edits_posts!
       return if current_user.posts.find_by(id: params[:id])
       render json: 'Forbidden', status: :forbidden
+    end
+
+    def vote(num)
+      post = Post.find(params[:id])
+      vote = post.votes.find_or_initialize_by(user: current_user)
+
+      unless vote.update(value: num)
+        flash[:errors] = vote.errors.full_messages
+      end
     end
 end

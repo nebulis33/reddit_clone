@@ -5,6 +5,11 @@
 
 <ul>
     <% @sub.posts.each do |post| %>
-        <li><%= link_to post.title, post_url(post) %></li>
+        <li>
+            <%= link_to post.title, post_url(post) %> 
+            <%= link_to "🔼", upvote_post_path(post), method: 'post' %> 
+            <%= link_to "🔽", downvote_post_path(post), method: 'post' %>
+            <%= post.votes_sum %> <%# too many queries%>
+        </li>
     <% end %>
 </ul>
